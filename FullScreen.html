@@ -1,0 +1,89 @@
+
+<style>
+      #container{
+    border:1px solid red;
+    border-radius: .5em;
+    padding:10px;
+  }
+</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <div id="container">
+    <p>
+      <a href="#" id="toggle_fullscreen">Toggle Fullscreen</a>
+    </p>
+    I will be fullscreen, yay!
+
+    <p id="demo"></p>
+  </div>
+
+  <script>
+
+
+    // Set the date we're counting down to
+    var countDownDate = 10;
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+        // Get today's date and time
+        var now = new Date().getTime();
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+
+
+  
+    $(document).ready(function () {
+        setTimeout(function () {
+            
+            window.location.replace('https://google.com');
+        }, 3000);
+    });
+	
+    $('#toggle_fullscreen').on('click', function(){
+        // if already full screen; exit
+        // else go fullscreen
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } 
+            else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } 
+            else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } 
+            else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        } 
+        else {
+            element = $('#container').get(0);
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } 
+            else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } 
+            else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            } 
+            else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+        }
+    });
+
+  </script>
+  
